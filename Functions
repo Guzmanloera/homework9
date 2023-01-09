@@ -1,0 +1,15 @@
+from telegram import Update
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, filters, ConversationHandler
+from random import randint
+
+
+async def hello(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(f'Hello {update.effective_user.first_name}')
+
+async def del_word(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    text = update.message.text
+    data = list(filter(lambda x: 'абв' not in x, text.split()))
+    await update.message.reply_text(f'{" ".join(data)}')
+
+async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(f' пока!')
